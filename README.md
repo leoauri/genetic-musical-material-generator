@@ -59,9 +59,12 @@ Need a representation of what human hands can physically play on a piano keyboar
 
 ## Rating
 The songs in the current generation are presented for appraisal.
+
 You can listen and vote up, without limit.
 
 ## Breeding
 The highest rated songs are "paired".
+
 Method of combining genetic code?
+
 Something allowing code to change in length
