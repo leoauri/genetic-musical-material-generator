@@ -1,3 +1,5 @@
+*Project is a STUB*
+
 # genetic-musical-material-generator
 Framework for developing musical material using genetic algorithm. The fitness criteria is "how much you like it"
 
@@ -12,15 +14,53 @@ Framework for developing musical material using genetic algorithm. The fitness c
 - highlight display colour
 
 ## Program Flow
-1. Initial random generation
-2. Discard unplayable
-3. Present results for rating
-4. Breeding of new generation weighted according to the rating
-5. goto 2
+1. random generation <=> Discard unplayable
+	- until specified number of initial "Songs" exist
+2. Present results for rating
+3. Breeding of new generation weighted according to the rating <=> Discard unplayable
+	- until specified number of offspring are created
+4. goto 2
 
 ## Genetic code
-Loosely inspired by LOGO
+- Genetic codes drive an engine which builds each "song"
+- Loosely inspired by LOGO
 
 ### Language elements
-- Pen up / down / toggle
-  
+- Interval : I{ -24, -23, ... 24 }
+	- specifies a movement by interval of the turtle.
+
+- Note : N{ 21, 22, ... 108 }
+	- specifies a jump to a particular note.  We use general MIDI note numbers, confined to the range of the piano.  
+
+- movement mode : M0 ; M1 ; MT
+	- When receiving interval and note commands, the turtle either progresses automatically after engraving the note by the rhythmic value set by turtle speed or it doesn't.  In essence this builds either melodies or chords respectively.  
+	- M0 and M1 turn off and on the automatic progress respectively, MT toggles the state.
+
+- Turtle speed : [1-8]/[1-8]
+	- in essence sets a rhythmic value for both turtle progression (when turtle progress is on) and step forwards/backwards commands.
+	- expressed as a fraction of a beat.
+
+- Step forwards/backwards by current turtle speed : GF ; GB
+
+- Skip forwards/backwards : S[FB][1-8]/[1-8]
+	- moves turtle by the designated rhythmic value (independently of current turtle speed)
+
+- Pen up / down / toggle : PU ; PD ; PT
+	- with pen up, the turtle follows the rhythmic and intervalic directions of the genetic code without actually engraving notes
+
+- Marker / Goto : M ; R
+	- these control movement of the cursor reading the genetic code and feeding it to the engine
+	- one use of a Marker or Goto destroys it
+	- a Goto moves back through the genetic code until a Marker is found, or to the beginning of the code, and continues reading through it again
+
+## Discard
+Need a representation of what human hands can physically play on a piano keyboard.
+
+## Rating
+The songs in the current generation are presented for appraisal.
+You can listen and vote up, without limit.
+
+## Breeding
+The highest rated songs are "paired".
+Method of combining genetic code?
+Something allowing code to change in length
