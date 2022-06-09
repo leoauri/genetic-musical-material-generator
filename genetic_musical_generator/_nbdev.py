@@ -2,7 +2,10 @@
 
 __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
-index = {"random_genome": "random_genome_to_midi.ipynb",
+index = {"crossover": "breed.ipynb",
+         "mutate": "breed.ipynb",
+         "mutate_crossover": "breed.ipynb",
+         "random_genome": "random_genome_to_midi.ipynb",
          "Note": "random_genome_to_midi.ipynb",
          "events_length": "random_genome_to_midi.ipynb",
          "NoteOn": "random_genome_to_midi.ipynb",
@@ -10,7 +13,8 @@ index = {"random_genome": "random_genome_to_midi.ipynb",
          "events_on_off": "random_genome_to_midi.ipynb",
          "genome2midi": "random_genome_to_midi.ipynb"}
 
-modules = ["random_genome_to_midi.py"]
+modules = ["breed.py",
+           "random_genome_to_midi.py"]
 
 doc_url = "https://leoauri.github.io/genetic_musical_generator/"
 
