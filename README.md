@@ -1,5 +1,3 @@
-*Project is a STUB*
-
 # genetic-musical-material-generator
 Framework for developing musical material using genetic algorithm. The fitness criteria is "how much you like it"
 
