@@ -94,15 +94,13 @@ def genome2midi(genome):
     e = None
     try:
         n = next(events)
+        e_start = n.time
         while True:
-            e = mido.Message('note_on' if isinstance(n, NoteOn) else 'note_off', note=n.pitch)
+            e = mido.Message('note_on' if isinstance(n, NoteOn) else 'note_off',
+                             note=n.pitch, time=round((n.time - e_start) * ppq))
             e_start = n.time
-            n = next(events)
-            e.time = round((n.time - e_start) * ppq)
             track.append(e)
+            n = next(events)
 
     except StopIteration:
-        if e is not None:
-            track.append(e)
-
-    return midifile
+        return midifile
