@@ -2,18 +2,38 @@
 
 __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
-index = {"crossover": "breed.ipynb",
+index = {"primefactors": "beat_fit.ipynb",
+         "FracHalves": "beat_fit.ipynb",
+         "Offset": "beat_fit.ipynb",
+         "BeatFit": "beat_fit.ipynb",
+         "note_starts": "beat_fit.ipynb",
+         "input_tempo": "beat_fit.ipynb",
+         "BeatFit.closest_div": "beat_fit.ipynb",
+         "BeatFit.random_state": "beat_fit.ipynb",
+         "BeatFit.temperature": "beat_fit.ipynb",
+         "BeatFit.neighbour": "beat_fit.ipynb",
+         "BeatFit.transformed_onsets": "beat_fit.ipynb",
+         "BeatFit.offsets": "beat_fit.ipynb",
+         "BeatFit.tempo": "beat_fit.ipynb",
+         "BeatFit.losses": "beat_fit.ipynb",
+         "NoteOn": "random_genome_to_midi.ipynb",
+         "NoteOff": "random_genome_to_midi.ipynb",
+         "complete": "beat_fit.ipynb",
+         "play": "beat_fit.ipynb",
+         "outport": "evolution.ipynb",
+         "crossover": "breed.ipynb",
          "mutate": "breed.ipynb",
          "mutate_crossover": "breed.ipynb",
+         "hear": "evolution.ipynb",
          "random_genome": "random_genome_to_midi.ipynb",
          "Note": "random_genome_to_midi.ipynb",
          "events_length": "random_genome_to_midi.ipynb",
-         "NoteOn": "random_genome_to_midi.ipynb",
-         "NoteOff": "random_genome_to_midi.ipynb",
          "events_on_off": "random_genome_to_midi.ipynb",
          "genome2midi": "random_genome_to_midi.ipynb"}
 
-modules = ["breed.py",
+modules = ["beat_fit.py",
+           "breed.py",
+           "utility.py",
            "random_genome_to_midi.py"]
 
 doc_url = "https://leoauri.github.io/genetic_musical_generator/"
