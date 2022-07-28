@@ -93,12 +93,15 @@ class BeatFit:
         self._input_tempo = None
         self.fitted_state = None
         self.loss_map = []
+        self.tempos = []
 
     def fit(self, iterations=100):
         state = self.random_state()
+        self.tempos.append(self.tempo(state))
         for iteration in range(iterations):
             temp = self.temperature(iteration/iterations)
             next_state = self.neighbour(state)
+            self.tempos.append(self.tempo(next_state))
             state_loss, next_state_loss = self.losses(state, next_state)
             if next_state_loss < state_loss or random.uniform(0,1) < math.exp((state_loss-next_state_loss)/temp):
                 state = next_state
@@ -216,7 +219,8 @@ def losses(self:BeatFit, state, next_state):
 
     # map offsets to losses, add tempo loss
     offs_lossf = lambda state: sum([self.loss_map.index(o) for o in self.offsets(state)])
-    tempo_lossf = lambda state: math.exp((self.tempo(state)-280)/4)
+    tempo_lossf = (lambda state: math.exp((self.tempo(state)-280)/4) if self.tempo(state)<3080 else
+        math.exp((3080-280)/4) + (self.tempo(state)-3080) * math.exp(105) / 4)
     state_loss = offs_lossf(state) + tempo_lossf(state)
     next_state_loss = offs_lossf(next_state) + tempo_lossf(next_state)
     return state_loss, next_state_loss
