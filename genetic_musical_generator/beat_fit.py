@@ -15,17 +15,21 @@ from fractions import Fraction
 
 # Cell
 def primefactors(n):
+    pfs = []
     while (n % 2 == 0):
-        yield 2
+        pfs.append(2)
         n //= 2
     p = 3
     while p*p <= n:
         while (n % p == 0):
-            yield p
+            pfs.append(p)
             n //= p
         p += 2
     if n > 2:
-        yield n
+        pfs.append(n)
+
+    for p in reversed(pfs):
+        yield p
     while True:
         yield 1
 
