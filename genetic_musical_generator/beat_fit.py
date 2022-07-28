@@ -8,6 +8,8 @@ import mido
 
 import random
 import math
+from math import floor, ceil
+
 from fastcore.basics import patch
 from fractions import Fraction
 
@@ -49,6 +51,7 @@ class Offset(Fraction):
         return Fraction.__new__(cls, f.numerator%f.denominator, f.denominator)
 
     def __lt__(self, other):
+        if self == other: return False
         if self.denominator != other.denominator:
             self_pf = primefactors(self.denominator)
             other_pf = primefactors(other.denominator)
@@ -59,10 +62,11 @@ class Offset(Fraction):
                     return sp < op
         else:
             fh = FracHalves()
-            vd = [Fraction(i,self.denominator) for i in range(self.denominator)]
             while True:
                 nfh = next(fh)
-                nf = [v for v in vd if v < nfh][-1]
+                num = ceil(nfh * self.denominator) - 1
+                nf = Fraction(num, self.denominator)
+
                 if nf == self: return True
                 if nf == other: return False
 
@@ -194,7 +198,15 @@ def tempo(self:BeatFit, state=None):
 @patch
 def losses(self:BeatFit, state, next_state):
     # update losses map with offsets from states
-    self.loss_map = sorted(list(set(self.loss_map)|set(self.offsets(state))|set(self.offsets(next_state))))
+#     self.loss_map = sorted(list(set(self.loss_map)|set(self.offsets(state))|set(self.offsets(next_state))))
+    for ss in [state, next_state]:
+        for s in self.offsets(ss):
+            if s not in self.loss_map:
+                self.loss_map.append(s)
+#     self.loss_map.extend(self.offsets(state))
+#     self.loss_map.extend(self.offsets(next_state))
+    self.loss_map.sort()
+
     # map offsets to losses, add tempo loss
     offs_lossf = lambda state: sum([self.loss_map.index(o) for o in self.offsets(state)])
     tempo_lossf = lambda state: math.exp((self.tempo(state)-280)/4)
@@ -204,7 +216,6 @@ def losses(self:BeatFit, state, next_state):
 
 # Cell
 from dataclasses import dataclass
-from math import floor, ceil
 
 @dataclass
 class NoteOn:
