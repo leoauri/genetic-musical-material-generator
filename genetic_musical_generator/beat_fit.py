@@ -49,11 +49,14 @@ def FracHalves():
         fh.extend(newf)
 
 # Cell
+from functools import cache
+
 class Offset(Fraction):
     def __new__(cls, *args):
         f = Fraction(*args)
         return Fraction.__new__(cls, f.numerator%f.denominator, f.denominator)
 
+    @cache
     def __lt__(self, other):
         if self == other: return False
         if self.denominator != other.denominator:
