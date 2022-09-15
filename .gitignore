@@ -1,4 +1,5 @@
 populations/
+*.mid
 
 *.bak
 .gitattributes

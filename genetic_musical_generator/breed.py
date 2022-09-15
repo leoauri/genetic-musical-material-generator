@@ -25,7 +25,7 @@ def crossover(a, b, swap_prob = 0.3, throw_prob = 0.3):
         return child
 
 # Cell
-def mutate(genome, skip_prob=0.05, change_prob=0.07, add_prob=0.05, alphabet='UDFBS'):
+def mutate(genome, skip_prob=0.01, change_prob=0.02, add_prob=0.01, alphabet='UDFBS'):
     copy_prob = 1-skip_prob-change_prob-add_prob
     output = ''
     for g in genome:
